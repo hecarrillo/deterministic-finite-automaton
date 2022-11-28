@@ -13,6 +13,7 @@ fn main() {
     let choice: Vec<usize> = menu.show();
     // parse choice to integer
     let choice_as_int = choice[0];
+    print!("{}[2J", 27 as char);
     // match the choice with the functions
     match choice_as_int {
         0 => {
