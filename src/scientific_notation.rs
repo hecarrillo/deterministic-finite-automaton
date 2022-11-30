@@ -111,5 +111,6 @@ pub fn is_valid_scientific_notation(s: &str) -> bool {
         print!("-> State: {:?}", state);
     }
     println!();
-    state == State::Integer || state == State::Decimal || state == State::ExponentInteger
+    return state == State::Integer || state == State::Decimal || state == State::ExponentInteger
 }
+
