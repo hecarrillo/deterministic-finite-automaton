@@ -7,61 +7,101 @@
 enum State {
     Start,
     Year,
-    YearSeparator,
-    Month,
+    JanToSep,
+    OctToDecOrJan,
+    MonthEnd,
     MonthSeparator,
-    Day,
+    FirstDay,
+    OnlyFirstTwoDaysOrEnd,
+    DayEnd,
+    DayOneToNine,
+    DaySeparator,
     End,
 }
 
 // State machine transitions
 
-// Transition from Start state
 fn start(c: char) -> State {
     match c {
-        '0'..='9' => State::Year,
+        '0' => State::DayOneToNine,
+        '1' | '2' => State::FirstDay,
+        '3' => State::OnlyFirstTwoDaysOrEnd,
+        '4'..='9' => State::DayEnd,
         _ => State::End,
     }
 }
 
-// Transition from Year state
 fn year(c: char) -> State {
     match c {
         '0'..='9' => State::Year,
-        '-' | '/' | '.' => State::YearSeparator,
         _ => State::End,
     }
 }
 
-// Transition from YearSeparator state
-fn year_separator(c: char) -> State {
+fn month_separator(c: char) -> State {
     match c {
-        '0'..='9' => State::Month,
+        '0'..='9' => State::Year,
         _ => State::End,
     }
 }
 
-// Transition from Month state
-fn month(c: char) -> State {
+fn first_day(c: char) -> State {
     match c {
-        '0'..='9' => State::Month,
+        '0'..='9' => State::DayEnd,
+        '-' | '/' | '.' => State::DaySeparator,
+        _ => State::End,
+    }
+}
+
+fn day_one_to_nine(c: char) -> State {
+    match c {
+        '1'..='9' => State::DayEnd,
+        _ => State::End,
+    }
+}
+
+fn only_first_two_days_or_end(c: char) -> State {
+    match c {
+        '0' | '1' => State::DayEnd,
+        '-' | '/' | '.' => State::DaySeparator,
+        _ => State::End,
+    }
+}
+
+fn day_end(c: char) -> State {
+    match c {
+        '-' | '/' | '.' => State::DaySeparator,
+        _ => State::End,
+    }
+}
+
+fn day_separator(c: char) -> State {
+    match c {
+        '0' => State::JanToSep,
+        '1' => State::OctToDecOrJan,
+        '2'..='9' => State::MonthEnd,
+        _ => State::End,
+    }
+}
+
+fn month_end(c: char) -> State {
+    match c {
         '-' | '/' | '.' => State::MonthSeparator,
         _ => State::End,
     }
 }
 
-// Transition from MonthSeparator state
-fn month_separator(c: char) -> State {
+fn jan_to_sep(c: char) -> State {
     match c {
-        '0'..='9' => State::Day,
+        '1'..='9' => State::MonthEnd,
         _ => State::End,
     }
 }
 
-// Transition from Day state
-fn day(c: char) -> State {
+fn oct_to_dec_or_jan(c: char) -> State {
     match c {
-        '0'..='9' => State::Day,
+        '0'..='2' => State::MonthEnd,
+        '-' | '/' | '.' => State::MonthSeparator,
         _ => State::End,
     }
 }
@@ -71,10 +111,15 @@ fn transition(state: State, c: char) -> State {
     match state {
         State::Start => start(c),
         State::Year => year(c),
-        State::YearSeparator => year_separator(c),
-        State::Month => month(c),
+        State::JanToSep => jan_to_sep(c),
+        State::OctToDecOrJan => oct_to_dec_or_jan(c),
+        State::MonthEnd => month_end(c),
         State::MonthSeparator => month_separator(c),
-        State::Day => day(c),
+        State::FirstDay => first_day(c),
+        State::OnlyFirstTwoDaysOrEnd => only_first_two_days_or_end(c),
+        State::DayEnd => day_end(c),
+        State::DaySeparator => day_separator(c),
+        State::DayOneToNine => day_one_to_nine(c),
         State::End => State::End,
     }
 }
@@ -84,5 +129,5 @@ pub fn is_valid_date_notation(s: &str) -> bool {
     for c in s.chars() {
         state = transition(state, c);
     }
-    state == State::Day
+    state == State::Year
 }
