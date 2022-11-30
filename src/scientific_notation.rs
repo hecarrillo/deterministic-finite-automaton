@@ -10,6 +10,7 @@ enum State {
     Sign,
     Integer,
     Decimal,
+    DecimalInteger,
     Exponent,
     ExponentSign,
     ExponentInteger,
@@ -50,12 +51,20 @@ fn integer(c: char) -> State {
 // Transition from Decimal state
 fn decimal(c: char) -> State {
     match c {
-        '0'..='9' => State::Integer,
+        '0'..='9' => State::DecimalInteger,
         'e' | 'E' => State::Exponent,
         _ => State::End,
     }
 }
 
+// Transition from Decimal Integer state
+fn decimal_integer(c:char) -> State{
+    match c {
+        '0'..='9' => State::DecimalInteger,
+        'e' | 'E' => State::Exponent,
+        _ => State::End
+    }
+}
 // Transition from Exponent state
 fn exponent(c: char) -> State {
     match c {
@@ -93,6 +102,7 @@ fn transition(state: State, c: char) -> State {
         State::Sign => sign(c),
         State::Integer => integer(c),
         State::Decimal => decimal(c),
+        State::DecimalInteger => decimal_integer(c),
         State::Exponent => exponent(c),
         State::ExponentSign => exponent_sign(c),
         State::ExponentInteger => exponent_integer(c),
@@ -108,9 +118,8 @@ pub fn is_valid_scientific_notation(s: &str) -> bool {
     for c in s.chars() {
         state = transition(state, c);
         // print curr state
-        print!("-> State: {:?}", state);
+        println!("-> State: {:?}", state);
     }
     println!();
-    return state == State::Integer || state == State::Decimal || state == State::ExponentInteger
+    state == State::Integer || state == State::DecimalInteger || state == State::ExponentInteger
 }
-
