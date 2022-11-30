@@ -124,10 +124,27 @@ fn transition(state: State, c: char) -> State {
     }
 }
 
-pub fn is_valid_date_notation(s: &str) -> bool {
-    let mut state = State::Start;
-    for c in s.chars() {
-        state = transition(state, c);
+fn is_the_accepted_state(state: State) -> bool {
+    match state {
+        State::Year => true,
+        _ => false,
     }
-    state == State::Year
+}
+
+pub fn is_valid(s: &str) -> bool {
+    let mut state = State::Start;
+    println!("_______STATES________\n");
+    println!("{:?}", state);
+    for c in s.chars() {
+        if state == State::End {
+            return false;
+        }
+        state = transition(state, c);
+        println!("⬇️");
+        println!("{:?}", state);
+    }
+    if is_the_accepted_state(state) {
+        return true;
+    }
+    return false;
 }

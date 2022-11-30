@@ -7,7 +7,23 @@ use std::io;
 // Create a selectable menu youchoose crate
 use youchoose::Menu;
 
-fn main() {
+fn print_accepted() {
+    println!("⬇️");
+    println!("ACCEPTED");
+}
+
+fn print_rejected() {
+    println!("⬇️");
+    println!("REJECTED");
+}
+
+fn read_user_input() -> String {
+    let mut input = String::new();
+    io::stdin().read_line(&mut input).expect("Failed to read line");
+    input.trim().to_string()
+}
+
+fn print_menu() -> usize {
     // Create a menu options 
     let options = vec!["Scientific notation","Pair of zeros","Sucessive letters", "Date notation", "Exit"];
     // Create a menu passing an Iterator of options
@@ -16,44 +32,51 @@ fn main() {
     // parse choice to integer
     let choice_as_int = choice[0];
     print!("{}[2J", 27 as char);
-    // match the choice with the functions
-    match choice_as_int {
-        0 => {
-            println!("Enter a string to check if it is a valid scientific notation");
-            let mut input = String::new();
-            io::stdin().read_line(&mut input).expect("Failed to read line");
-            let input = input.trim();
-            let result = scientific_notation::is_valid_scientific_notation(input);
-            println!("{} is a valid scientific notation: {}", input, result);
+    choice_as_int
+} 
+
+fn main() {
+    loop {
+        let choice = print_menu();
+        if choice == 4 {
+            break;
         }
-        1 => {
-        println!("Enter a string to check if it is a string with pair number of zeros and without ones in a row");
-            let mut input = String::new();
-            io::stdin().read_line(&mut input).expect("Failed to read line");
-            let input = input.trim();
-            let result = pair_zeros::is_valid_pair_zeros(input);
-            println!("{} is a valid string: {}", input, result);
+        println!("Enter a string to validate:");
+        let input: String = read_user_input();
+        match choice {
+            0 => {
+                if scientific_notation::is_valid(&input) {
+                    print_accepted();
+                } else {
+                    print_rejected();
+                }
+            },
+            1 => {
+                if pair_zeros::is_valid(&input) {
+                    print_accepted();
+                } else {
+                    print_rejected();
+                }
+            },
+            2 => {
+                if sucessive_letters::is_valid(&input) {
+                    print_accepted();
+                } else {
+                    print_rejected();
+                }
+            },
+            3 => {
+                if date_notation::is_valid(&input) {
+                    print_accepted();
+                } else {
+                    print_rejected();
+                }
+            },
+            _ => {
+                println!("Invalid choice");
+            }
         }
-        2 => {
-            println!("Enter a string to check if it is a string with at least two succesive same letters");
-            let mut input = String::new();
-            io::stdin().read_line(&mut input).expect("Failed to read line");
-            let input = input.trim();
-            let result = sucessive_letters::is_valid_sucessive_letters(input);
-            println!("{} is a valid string: {}", input, result);
-        }
-        3 => {
-            println!("Enter a string to check if it is a valid date notation");
-            let mut input = String::new();
-            io::stdin().read_line(&mut input).expect("Failed to read line");
-            let input = input.trim();
-            let result = date_notation::is_valid_date_notation(input);
-            println!("{} is a valid date notation: {}", input, result);
-        }
-        4 => {
-            println!("Goodbye!");
-        }
-        _ => println!("Invalid choice"),
+        read_user_input();
     }
 }
 

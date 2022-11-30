@@ -89,16 +89,27 @@ fn transition(state: State, c: char) -> State {
     }
 }
 
-// State machine
-pub fn is_valid_pair_zeros(s: &str) -> bool {
-    let mut state = State::Start;
-    // print curr state
-    print!("State: {:?}", state);
-    for c in s.chars() {
-        state = transition(state, c);
-        // print curr state
-        println!("-> State: {:?}", state);
+fn is_the_accepted_state(state: State) -> bool {
+    match state {
+        State::PairZero | State::PairZeroOne => true,
+        _ => false,
     }
-    println!();
-    state == State::PairZero || state == State::PairZeroOne
+}
+
+pub fn is_valid(s: &str) -> bool {
+    let mut state = State::Start;
+    println!("_______STATES________\n");
+    println!("{:?}", state);
+    for c in s.chars() {
+        if state == State::End {
+            return false;
+        }
+        state = transition(state, c);
+        println!("⬇️");
+        println!("{:?}", state);
+    }
+    if is_the_accepted_state(state) {
+        return true;
+    }
+    return false;
 }
