@@ -31,6 +31,14 @@ Note: The format should be day -> month -> year
 <p align="center">
 <img width="700" alt="image" src="https://user-images.githubusercontent.com/55115748/205179273-d50313e2-cc89-4081-a7cf-b8f08298c9ff.png">
 </p>
+
+## How to Run
+Clone the Repo and simply `cargo run` on the project's root folder.
+### Execution Example:
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/55115748/205180619-971c8d6c-31de-4645-ad57-4e852aba4caa.png">
+<img width="500" alt="image" src="https://user-images.githubusercontent.com/55115748/205180681-b293d238-4674-4d21-a73d-fcc6bd9579e1.png">
+
+
 All of these examples have different state machines, but share the same structure in order to build the States and Transition Functions between them.
 </br>
 Built in Rust. Implementation inspired by <a href="https://hoverbear.org/blog/rust-state-machine-pattern/">Pretty State Machine Patterns in Rust by Anna Hoverbear</a>
