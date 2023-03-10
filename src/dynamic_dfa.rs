@@ -108,7 +108,6 @@ fn validate_input(
         println!("⬇️");
         println!("{}", current_state);
         if dfa[&current_state][token] == "None" {
-            println!("Rejected");
             return Err(());
         } else {
             current_state = dfa[&current_state][token].to_string();
