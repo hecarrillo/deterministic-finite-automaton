@@ -1,5 +1,4 @@
 // State machine that checks if a string is a valid date
-// (e.g. 2020-01-01, 2020-1-1, 2020/01/01, 2020/1/1, 2020.01.01, 2020.1.1)
 
 // State machine states
 #[derive(PartialEq)]

@@ -1,8 +1,10 @@
 // Import scientific_notation.rs and use its functions
-mod scientific_notation;
-mod pair_zeros;
-mod sucessive_letters;
 mod date_notation;
+mod dynamic_dfa;
+mod pair_zeros;
+mod scientific_notation;
+mod sucessive_letters;
+
 use std::io;
 // Create a selectable menu youchoose crate
 use youchoose::Menu;
@@ -19,13 +21,22 @@ fn print_rejected() {
 
 fn read_user_input() -> String {
     let mut input = String::new();
-    io::stdin().read_line(&mut input).expect("Failed to read line");
+    io::stdin()
+        .read_line(&mut input)
+        .expect("Failed to read line");
     input.trim().to_string()
 }
 
 fn print_menu() -> usize {
-    // Create a menu options 
-    let options = vec!["Scientific notation","Pair of zeros","Sucessive letters", "Date notation", "Exit"];
+    // Create a menu options
+    let options = vec![
+        "Scientific notation",
+        "Pair of zeros",
+        "Sucessive letters",
+        "Date notation",
+        "Dynamic DFA",
+        "Exit",
+    ];
     // Create a menu passing an Iterator of options
     let mut menu = Menu::new(options.iter());
     let choice: Vec<usize> = menu.show();
@@ -33,12 +44,12 @@ fn print_menu() -> usize {
     let choice_as_int = choice[0];
     print!("{}[2J", 27 as char);
     choice_as_int
-} 
+}
 
 fn main() {
     loop {
         let choice = print_menu();
-        if choice == 4 {
+        if choice == 5 {
             break;
         }
         println!("Enter a string to validate:");
@@ -50,28 +61,31 @@ fn main() {
                 } else {
                     print_rejected();
                 }
-            },
+            }
             1 => {
                 if pair_zeros::is_valid(&input) {
                     print_accepted();
                 } else {
                     print_rejected();
                 }
-            },
+            }
             2 => {
                 if sucessive_letters::is_valid(&input) {
                     print_accepted();
                 } else {
                     print_rejected();
                 }
-            },
+            }
             3 => {
                 if date_notation::is_valid(&input) {
                     print_accepted();
                 } else {
                     print_rejected();
                 }
-            },
+            }
+            4 => {
+                dynamic_dfa::validate(&input);
+            }
             _ => {
                 println!("Invalid choice");
             }
@@ -79,9 +93,3 @@ fn main() {
         read_user_input();
     }
 }
-
-
-
-
-
-
