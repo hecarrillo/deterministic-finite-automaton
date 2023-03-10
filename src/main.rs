@@ -5,7 +5,7 @@ mod pair_zeros;
 mod scientific_notation;
 mod sucessive_letters;
 
-use std::io;
+use std::{io};
 // Create a selectable menu youchoose crate
 use youchoose::Menu;
 
@@ -84,7 +84,12 @@ fn main() {
                 }
             }
             4 => {
-                dynamic_dfa::validate(&input);
+                let result = dynamic_dfa::is_valid(&input);
+                if result == Ok(()) {
+                    print_accepted();
+                } else {
+                    print_rejected();
+                }
             }
             _ => {
                 println!("Invalid choice");

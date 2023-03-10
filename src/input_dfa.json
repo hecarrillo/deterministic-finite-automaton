@@ -1,8 +1,8 @@
 {
     "tokens": ["a", "b"],
     "states": ["q1", "q2", "q3"],
-    "initial": "q1",
-    "accepting": ["q3"],
+    "initial_state": "q1",
+    "accepted_states": ["q3"],
     "transitions": {
         "q1": {
             "a": "q2",
