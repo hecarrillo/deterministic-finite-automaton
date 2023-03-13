@@ -16,7 +16,9 @@ A deterministic finite automaton (DFA) is a mathematical model used in computer 
 <img width="700" alt="image" src="https://user-images.githubusercontent.com/55115748/205177923-18912a95-349b-4d3f-bde4-0f7440f7eb58.png">
 </p>
 
-## Pair number of 0's without successive 1's
+## Pre-configured DFAs to check common strings
+
+### Pair number of 0's without successive 1's
 
 - Alphabet(Sigma): {1,0}
 - Accepted string examples: 1001, 101010101, 00, 00001
@@ -25,7 +27,7 @@ A deterministic finite automaton (DFA) is a mathematical model used in computer 
 <img width="700" alt="image" src="https://user-images.githubusercontent.com/55115748/205178407-7559351a-2a1b-4295-ba02-f132095a474b.png">
 </p>
 
-## Successive Letters
+### Successive Letters
 - Alphabet(Sigma): {a, b, c, d}
 - Accepted string examples: aa, abcdd, abcc, aaaaab
 - Rejected string examples: abcd, a, abc, ba
@@ -33,7 +35,7 @@ A deterministic finite automaton (DFA) is a mathematical model used in computer 
 <img width="700" alt="image" src="https://user-images.githubusercontent.com/55115748/205179347-f149c789-bf61-4a46-a575-b4e092d99000.png">
 </p>
 
-## Date Notation 
+### Date Notation 
 Note: The format should be day -> month -> year
 - Accepted string examples: 12/12/12, 3.4.2022, 31-1-2000
 - Rejected string examples: 32/12/2000, 3-13-2010, 234-3
