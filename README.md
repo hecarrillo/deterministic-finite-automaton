@@ -9,14 +9,26 @@ A deterministic finite automaton (DFA) is a mathematical model used in computer 
   - `initial_state`: The initial state of the DFA
   - `accepted_states`: The accepting states of the DFA
   - `transitions`: The transition functions of the DFA, where each transition is represented by having the state as the key and the transition function as the value. For each input token, the transition function returns the next state.
-## Scientific Notation
+
+<p align="center">
+
+|JSON config|DFA generated|
+|---|---|
+|<img width="300" alt="image" src="https://user-images.githubusercontent.com/55115748/224799394-a4df0902-cc16-4a49-9efa-f9bdea82f463.png">|<img width="300" alt="image" src="https://user-images.githubusercontent.com/55115748/224801709-06a6e70d-02bf-4de1-9593-6829cc3e0b41.png">|
+
+### Execution example for string validation
+<img width="500" alt="Screenshot 2023-03-13 at 12 59 53" src="https://user-images.githubusercontent.com/55115748/224802843-e83ce2a7-d953-4bd5-b0a8-fc6bca33587f.png">
+
+</p>
+
+## Pre-configured DFAs to check common strings
+
+### Scientific Notation
 - Accepted string examples: 123e+3, 2.3E3, 123, 345.4e-3
 - Rejected string examples: 234.234.3, 5-2, 45e34.3
 <p align="center">
 <img width="700" alt="image" src="https://user-images.githubusercontent.com/55115748/205177923-18912a95-349b-4d3f-bde4-0f7440f7eb58.png">
 </p>
-
-## Pre-configured DFAs to check common strings
 
 ### Pair number of 0's without successive 1's
 
@@ -46,9 +58,9 @@ Note: The format should be day -> month -> year
 ## How to Run
 Clone the Repo and simply `cargo run` on the project's root folder.
 ### Execution Example:
-<img width="500" alt="image" src="https://user-images.githubusercontent.com/55115748/205180619-971c8d6c-31de-4645-ad57-4e852aba4caa.png">
-<img width="500" alt="image" src="https://user-images.githubusercontent.com/55115748/205180681-b293d238-4674-4d21-a73d-fcc6bd9579e1.png">
 
+<img width="500" alt="Screenshot 2023-03-13 at 12 57 02" src="https://user-images.githubusercontent.com/55115748/224802311-61b6c5b7-e695-4fe5-8901-88ab20a4210d.png">
+<img width="500" alt="Screenshot 2023-03-13 at 12 58 28" src="https://user-images.githubusercontent.com/55115748/224802604-6723b27f-3aca-49ea-8aea-78a08cdafd27.png">
 
 All of these examples have different state machines, but share the same structure in order to build the States and Transition Functions between them.
 </br>
