@@ -1,5 +1,14 @@
 # deterministic-finite-automata
-Deterministic Finite Automata to enforce the patterns described by a regular language. The examples in this specific project include the following pattern checkers for strings: 
+A deterministic finite automaton (DFA) is a mathematical model used in computer science and theoretical linguistics to recognize patterns in string inputs. It is a type of finite state machine that operates by reading a sequence of symbols from an input string and moving through a series of states based on those symbols. The DFA accepts or rejects the input string based on whether the final state it reaches after processing the input is an accepting state or not. In this project, several DFAs have been developed to check string inputs for various patterns and purposes. These DFAs have been implemented using Rust and can be used to validate string inputs for specific patterns or conditions. There's also the option to validate a string with a custom DFA.
+
+## Custom DFA using a JSON config file
+- Allows the user to create their own DFA using a JSON config file (src/input_dfa.json), which can be used to validate a string input. 
+- The JSON config file contains the following fields:
+  - `tokens`: The tokens or alphabet accepted for the DFA
+  - `states`: The states of the DFA
+  - `initial_state`: The initial state of the DFA
+  - `accepted_states`: The accepting states of the DFA
+  - `transitions`: The transition functions of the DFA, where each transition is represented by having the state as the key and the transition function as the value. For each input token, the transition function returns the next state.
 ## Scientific Notation
 - Accepted string examples: 123e+3, 2.3E3, 123, 345.4e-3
 - Rejected string examples: 234.234.3, 5-2, 45e34.3
