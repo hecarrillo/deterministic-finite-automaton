@@ -1,4 +1,4 @@
-# deterministic-finite-automata
+# deterministic-finite-automaton
 A deterministic finite automaton (DFA) is a mathematical model used in computer science and theoretical linguistics to recognize patterns in string inputs. It is a type of finite state machine that operates by reading a sequence of symbols from an input string and moving through a series of states based on those symbols. The DFA accepts or rejects the input string based on whether the final state it reaches after processing the input is an accepting state or not. In this project, several DFAs have been developed to check string inputs for various patterns and purposes. These DFAs have been implemented using Rust and can be used to validate string inputs for specific patterns or conditions. There's also the option to validate a string with a custom DFA.
 
 ## Custom DFA using a JSON config file
